@@ -1,22 +1,24 @@
-import express = require("express");
+import server from "./server";
+const express = require("express");
 
-const app = express()
-app.set("port", process.env.PORT || 3000)
+const app = express();
 
-export default app
+app.get("/user-api/user", (req, res) => {
+  res.send("Welcome back!");
+});
 
-app.get('/user-api/user', req, res) => {
-  res.send('Welcome back ${user.email}!')
-}
+app.post("user-api/user", (req, res) => {
+  res.send("User created");
+});
 
-app.post('user-api/user', req, res) => {
-  res.send('User created')
-}
-
-// app.put('/user-api/user', req, res) =>{
+// app.put('/user-api/user', (req, res) =>{
 //   res.send('User updated')
-// }
+// })
 
-app.delete('user-api/user', req, res) =>{
-  res.send('User deleted')
-}
+// app.delete("user-api/user", (req, res) => {
+//   res.send("User deleted");
+// });
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on ${port}`));
+
+export default app;
